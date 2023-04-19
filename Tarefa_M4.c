@@ -92,8 +92,32 @@ int consultar ()
 
 int deletar ()
 {
-    printf("Você escolheu deletar nomes\n\n");
-    getchar();
+    char cpf[40];
+
+	printf("Digite o CPF do usuário a ser deletado: ");
+	scanf("%s",cpf);
+
+	FILE *file;
+	file = fopen(cpf,"r");
+
+	if(file == NULL)
+	{
+		printf("O usuário não se encontra no sistema!.\n\n");
+		system("pause");
+	}
+	else
+	{
+		fclose(file);
+		remove(cpf);
+		FILE *file;
+		file = fopen(cpf,"r");
+		if(file == NULL)
+		{
+			printf("Usuário deletado com sucesso!.\n\n");
+            getchar();
+		}
+	}
+	fclose(file);
 }
 
 int main()
@@ -104,7 +128,6 @@ int main()
     for (laco = 1; laco = 1;)
 
     {
-        system("clear");
         setlocale(LC_ALL,"Portuguese"); // definindo a linguagem
 
         // início do menu
@@ -113,6 +136,7 @@ int main()
         printf("\t1 -Registrar nomes \n\n");
         printf("\t2 -Consultar nomes \n\n");
         printf("\t3 -Deletar nomes \n\n");
+        printf("\t4 - Sair do sistema\n\n");
         printf("Opção:");
         // fim do menu
 
@@ -136,6 +160,11 @@ int main()
             case 3:
             deletar ();
             getchar();
+            break;
+
+            case 4:
+            printf("Obrigado por utilizar o sistema!\n");
+            return 0;
             break;
 
             default:
